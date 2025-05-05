@@ -200,9 +200,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 This project was developed by: 
+- [Joaquin](https://github.com/Jjoaquin04)
 - [Jorge](https://github.com/Eclipse3k)
 - [Sergio](https://github.com/CodeInIA)
-- [Joaquin](https://github.com/Jjoaquin04)
 
 
 
