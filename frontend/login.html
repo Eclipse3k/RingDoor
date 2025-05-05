@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Access Control - Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <i class="fas fa-shield-alt"></i>
+      <h1>Enterprise Access Control</h1>
+      <p>Secure Access Management System</p>
+    </div>
+    
+    <div id="errorMessage" class="login-error">
+      <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
+      <div class="error-text">Invalid username or password</div>
+    </div>
+    
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-with-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="username" required placeholder="Enter your username">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-with-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" required placeholder="Enter your password">
+        </div>
+      </div>
+      <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+
+    <div class="login-footer">
+      <p>© 2025 Enterprise Access Control</p>
+    </div>
+  </div>
+  
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // Hide error message initially
+    errorMessage.style.display = 'none';
+    
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        
+        if (response.ok) {
+          // Redirect to main page on successful login
+          window.location.href = '/';
+        } else {
+          // Show error message
+          errorMessage.style.display = 'flex';
+          document.getElementById('password').value = '';
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        errorMessage.style.display = 'flex';
+      }
+    });
+  </script>
+</body>
+</html>

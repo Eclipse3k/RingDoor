@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Access Control System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <i class="fas fa-shield-alt"></i>
+        <h1>Enterprise Access Control</h1>
+      </div>
+      <button id="logoutButton" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </header>
+    
+    <div class="tab-navigation">
+      <button class="tab-button active" data-tab="dashboardTab">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+      </button>
+      <button class="tab-button" data-tab="cardsTab">
+        <i class="fas fa-id-card"></i> NFC Cards
+      </button>
+      <button class="tab-button" data-tab="usersTab">
+        <i class="fas fa-fingerprint"></i> Users & Access
+      </button>
+      <button class="tab-button" data-tab="bluetoothTab">
+        <i class="fab fa-bluetooth-b"></i> Bluetooth
+      </button>
+      <button class="tab-button" data-tab="securityLogsTab">
+        <i class="fas fa-shield-alt"></i> Security Logs
+      </button>
+    </div>
+    
+    <!-- Dashboard Tab -->
+    <div id="dashboardTab" class="tab-content active">
+      <div class="dashboard-grid">
+        <div class="status-card sync">
+          <div class="status-icon"><i class="fas fa-clock"></i></div>
+          <div class="status-details">
+            <h3>Last Server Sync</h3>
+            <p id="lastSyncTime">Not synced yet</p>
+          </div>
+        </div>
+        
+        <div class="status-card cards">
+          <div class="status-icon"><i class="fas fa-id-card"></i></div>
+          <div class="status-details">
+            <h3>NFC Cards</h3>
+            <p id="cardCount">0</p>
+          </div>
+        </div>
+        
+        <div class="status-card users">
+          <div class="status-icon"><i class="fas fa-fingerprint"></i></div>
+          <div class="status-details">
+            <h3>Users</h3>
+            <p id="userCount">0</p>
+          </div>
+        </div>
+        
+        <div class="status-card bluetooth">
+          <div class="status-icon"><i class="fab fa-bluetooth-b"></i></div>
+          <div class="status-details">
+            <h3>Bluetooth Devices</h3>
+            <p id="btCount">0</p>
+          </div>
+        </div>
+        
+        <div class="status-card security-logs">
+          <div class="status-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="status-details">
+            <h3>Security Logs</h3>
+            <p id="securityLogsCount">0</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="devices-container">
+        <h2><i class="fas fa-microchip"></i> Connected ESP32 Devices</h2>
+        <ul id="activeDevicesList" class="devices-list">
+          <li class="device-item">No devices connected</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- NFC Cards Tab -->
+    <div id="cardsTab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fas fa-id-card"></i> NFC Card Management</h2>
+      </div>
+      
+<div class="card-form">
+  <h3>Add New Security Card</h3>
+  <form id="addCardForm" class="standard-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="cardId">Card UID (hex format):</label>
+        <input type="text" id="cardId" required placeholder="Enter NFC card UID (e.g., 04A21B6F)">
+      </div>
+      <div class="form-group">
+        <label for="cardName">Card Name:</label>
+        <input type="text" id="cardName" placeholder="Enter a descriptive name">
+      </div>
+    </div>
+    <button type="submit" class="primary-btn"><i class="fas fa-plus-circle"></i> Register Card</button>
+  </form>
+</div>
+      
+      <div class="card-list">
+        <h3>Authorized Security Cards</h3>
+        <div class="table-container">
+          <table class="data-table">
+  <thead>
+    <tr>
+      <th>Card UID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="cardTableBody">
+    <!-- NFC cards will be populated here -->
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Users & Access Tab -->
+    <div id="usersTab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fas fa-fingerprint"></i> User Access Management</h2>
+        <p class="section-description">Users are registered automatically when a new fingerprint is scanned after an NFC card is presented to the system.</p>
+      </div>
+      
+      <div class="users-container">
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+          <div class="info-content">
+            <h3>Registration Process</h3>
+            <p>1. Present an NFC card to the reader</p>
+            <p>2. Have the new user scan their fingerprint on the biometric device</p>
+            <p>3. The system will automatically register the user</p>
+            <p>4. User information will appear in the list below once registered</p>
+          </div>
+        </div>
+        
+        <div class="fingerprint-list">
+          <h3>Registered Users</h3>
+          <div class="table-container">
+            <table class="data-table">
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Fingerprint ID</th>
+      <th>Registration Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="fingerprintTableBody">
+    <!-- Fingerprint users will be populated here -->
+  </tbody>
+</table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bluetooth Tab -->
+    <div id="bluetoothTab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fab fa-bluetooth-b"></i> Bluetooth Device Management</h2>
+      </div>
+      
+      <div class="bt-form">
+        <h3>Add New Bluetooth Device</h3>
+        <form id="addBtForm" class="standard-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="btMac">MAC Address:</label>
+              <input type="text" id="btMac" required placeholder="Format: AA:BB:CC:DD:EE:FF">
+            </div>
+            <div class="form-group">
+              <label for="btName">Device Name:</label>
+              <input type="text" id="btName" required placeholder="Owner's name or device description">
+            </div>
+          </div>
+          <button type="submit" class="primary-btn"><i class="fas fa-plus-circle"></i> Register Device</button>
+        </form>
+      </div>
+      
+      <div class="bt-list">
+        <h3>Authorized Bluetooth Devices</h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>MAC Address</th>
+                <th>Device Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="btTableBody">
+              <!-- Bluetooth devices will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Security Logs Tab -->
+    <div id="securityLogsTab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fas fa-shield-alt"></i> Security Logs</h2>
+      </div>
+      
+      <div class="log-filters">
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-list-ul"></i> All Logs
+          </button>
+          <button class="filter-btn access-denied" data-filter="access_denied">
+            <i class="fas fa-ban"></i> Access Denied
+          </button>
+          <button class="filter-btn motion-detected" data-filter="motion_detected">
+            <i class="fas fa-walking"></i> Motion Detected
+          </button>
+          <button class="filter-btn access-granted" data-filter="access_granted">
+            <i class="fas fa-check-circle"></i> Access Granted
+          </button>
+        </div>
+        <div class="log-actions">
+          <button id="deleteAllLogsBtn" class="delete-logs-btn">
+            <i class="fas fa-trash-alt"></i> Delete All Logs
+          </button>
+        </div>
+      </div>
+      
+      <div class="logs-container">
+        <div id="logsWrapper" class="logs-wrapper">
+          <!-- Security logs will be inserted here -->
+          <div class="log-empty-state">
+            <i class="fas fa-clipboard-list"></i>
+            <p>No security logs found</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Photo Viewer Modal -->
+      <div id="photoModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Security Photo</h3>
+            <span class="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <img id="securityPhoto" src="" alt="Security photo">
+            <div class="photo-details">
+              <p id="photoTimestamp"></p>
+              <p id="photoDescription"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal (moved to body for global access) -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirm Deletion</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the selected logs?</p>
+        <div class="modal-actions">
+          <button id="cancelDeleteBtn" class="secondary-btn">Cancel</button>
+          <button id="confirmDeleteBtn" class="danger-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+
+  <!-- Edit Card Modal -->
+  <div id="editCardModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit NFC Card</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="editCardForm" class="standard-form">
+  <input type="hidden" id="editCardUid">
+  <div class="form-group">
+    <label for="editCardName">Card Name:</label>
+    <input type="text" id="editCardName" required>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="secondary-btn cancel-card-edit">Cancel</button>
+    <button type="button" id="saveCardChangesBtn" class="primary-btn">Save Changes</button>
+  </div>
+</form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Fingerprint Modal -->
+  <div id="editFingerprintModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit User</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="editFingerprintForm" class="standard-form">
+  <input type="hidden" id="editFingerprintId">
+  <div class="form-group">
+    <label for="editFingerprintName">User Name:</label>
+    <input type="text" id="editFingerprintName" required>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="secondary-btn cancel-fingerprint-edit">Cancel</button>
+    <button type="button" id="saveFingerprintChangesBtn" class="primary-btn">Save Changes</button>
+  </div>
+</form>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

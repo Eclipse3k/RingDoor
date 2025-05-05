@@ -1,0 +1,58 @@
+# Node.js dependencies and logs
+backend/node_modules/
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Data files (except samples/templates)
+backend/data/*.json
+!backend/data/sample_*.json
+!backend/data/.gitkeep
+
+# Security photos
+backend/data/photos/*
+!backend/data/photos/.gitkeep
+
+# Environment configuration
+.env
+.env.local
+.env.development
+.env.production
+
+# Arduino/ESP32 build artifacts
+*.bin
+*.elf
+*.hex
+*.bin.gz
+*.ino.bin
+*.ino.elf
+*.ino.hex
+.pio/
+.pioenvs/
+.piolibdeps/
+build/
+.arduino/
+.platformio/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.tmp/
+.cache/
+dist/
