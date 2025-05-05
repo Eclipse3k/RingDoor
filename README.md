@@ -97,7 +97,7 @@ GPIO12 <-> Deny LED (red)
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/esp32-access-control.git
+   git clone 'https://github.com/Eclipse3k/esp32-access-control.git'
    cd esp32-access-control
    ```
 
