@@ -209,18 +209,28 @@ This project was developed by:
 
 ## Screenshots
 
-<table>
-  <tr>
-	<td><img src="images/dashboard.jpg" alt="Dashboard" width="400"/></td>
-	<td><img src="images/users.jpg" alt="Users" width="400"/></td>
-  </tr>
-  <tr>
-	<td><img src="images/security-logs.jpg" alt="Security Logs" width="400"/></td>
-	<td></td>
-  </tr>
-</table>
+## Screenshots
 
-These screenshots showcase key features of our system:
-- Dashboard: Main control interface with system status
-- Users: User management and permissions
-- Security Logs: Activity monitoring and security events
+### Dashboard
+![Dashboard](images/dashboard.jpg)
+The main control interface provides an at-a-glance view of system status, including:
+- Current date and time
+- Connected ESP32 devices count
+- Access activity summary
+- Real-time system metrics
+
+### User Access Management
+![User Management](images/users.jpg)
+The user management interface allows administrators to:
+- Register and manage authorized users
+- Set individual access permissions
+- View registered device information
+- Monitor access frequencies
+
+### Security Logging
+![Security Logs](images/security-logs.jpg)
+The security log system provides:
+- Comprehensive audit trails of all access attempts
+- Color-coded severity indicators
+- Timestamp and user information
+- Filtering and search capabilities
