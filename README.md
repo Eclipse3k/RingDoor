@@ -205,10 +205,6 @@ This project was developed by:
 - [Sergio](https://github.com/CodeInIA)
 
 
-
-
-## Screenshots
-
 ## Screenshots
 
 ### Dashboard
@@ -222,10 +218,10 @@ The main control interface provides an at-a-glance view of system status, includ
 ### User Access Management
 ![User Management](images/users.jpg)
 The user management interface allows administrators to:
-- Register and manage authorized users
-- Set individual access permissions
-- View registered device information
-- Monitor access frequencies
+- View all registered users and their fingerprint IDs
+- Monitor registration dates for each user
+- Modify user names as needed
+- Delete users from the system
 
 ### Security Logging
 ![Security Logs](images/security-logs.jpg)
