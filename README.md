@@ -211,17 +211,16 @@ This project was developed by:
 
 <table>
   <tr>
-    <td><img src="images/dashboard.jpg" alt="Dashboard" width="400"/></td>
-    <td><img src="images/hardware-setup.jpg" alt="Hardware Setup" width="400"/></td>
+	<td><img src="images/dashboard.jpg" alt="Dashboard" width="400"/></td>
+	<td><img src="images/users.jpg" alt="Users" width="400"/></td>
   </tr>
   <tr>
-    <td><img src="images/security-logs.jpg" alt="Security Logs" width="400"/></td>
-    <td><img src="images/mobile-alerts.jpg" alt="Mobile Alerts" width="400"/></td>
+	<td><img src="images/security-logs.jpg" alt="Security Logs" width="400"/></td>
+	<td></td>
   </tr>
 </table>
 
-<!-- 
-When you have photos ready:
-1. Add them to the 'images' folder with the filenames above
-2. Or rename the image references here to match your actual filenames
--->
+These screenshots showcase key features of our system:
+- Dashboard: Main control interface with system status
+- Users: User management and permissions
+- Security Logs: Activity monitoring and security events
