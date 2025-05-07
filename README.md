@@ -14,7 +14,7 @@ A complete access control solution using ESP32 and Arduino platforms to manage s
 - **Multi-factor Authentication**:
   - NFC card scanning
   - Fingerprint recognition
-  - Bluetooth proximity detection
+  - Motion detection
 
 - **Security Monitoring**:
   - Photo capture on access attempts
